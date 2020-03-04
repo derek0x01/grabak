@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiong.dao.BookMapper">
+    <!--Mybatis动态开发四大原则：
+    1.方法名需要与xml映射文件中的id保持一致
+    2.接口方法中形参类型需要与xml映射文件中的parameterType的类型保持一致
+    3.接口方法中的返回类型需要与xml映射文件中的resultType的类型保持一致
+    4.xml映射文件中的namespace需要与接口包名保持一致
+    -->
+    <!--添加-->
+    <insert id="addBook" parameterType="Books" >
+        insert into ssmbuild.books(bookName, bookCounts, detail)
+        values (#{bookName},#{bookCounts},#{detail})
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteBookByID" parameterType="Integer">
+        delete from ssmbuild.books where bookID=#{bookID}
+    </delete>
+
+    <!--更新-->
+    <update id="updateBook" parameterType="Books">
+        update ssmbuild.books set
+        bookName=#{bookName},
+        bookCounts=#{bookCounts},
+        detail=#{detail}
+        where
+        bookID=#{bookID}
+    </update>
+
+    <!--查询-->
+    <select id="queryBookByID" parameterType="Integer" resultType="Books">
+        select *from ssmbuild.books
+        where
+        bookID=#{bookID}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryAllBooks" resultType="Books">
+        select * from ssmbuild.books
+    </select>
+</mapper>
